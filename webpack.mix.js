@@ -32,7 +32,7 @@ mix.js('resources/assets/js/app.js', 'public/js')
    .copy('resources/assets/img/*.*','public/img')
    //VENDOR RESOURCES
    .copy('node_modules/font-awesome/fonts/*.*','public/fonts/')
-   .copy('node_modules/ionicons/dist/fonts/*.*','public/fonts/')
+   .copy('node_modules/ionicons/fonts/*.*','public/fonts/')
    .copy('node_modules/admin-lte/bootstrap/fonts/*.*','public/fonts/bootstrap')
    .copy('node_modules/admin-lte/dist/css/skins/*.*','public/css/skins')
    .copy('node_modules/admin-lte/dist/img','public/img')
