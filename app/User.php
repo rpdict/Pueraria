@@ -26,4 +26,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * 获取该用户所属的组。
+     */
+    public function group()
+    {
+        return $this->belongsToMany(Group::class);
+    }
 }
