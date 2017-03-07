@@ -31,6 +31,6 @@ class CreateActionsGroupsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('actions_groups');
     }
 }

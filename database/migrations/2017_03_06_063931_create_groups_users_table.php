@@ -31,6 +31,6 @@ class CreateGroupsUsersTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('groups_users');
     }
 }
