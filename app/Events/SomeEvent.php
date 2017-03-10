@@ -10,27 +10,34 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class SomeEvent
+class SomeEvent extends Event implements ShouldBroadcast
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use SerializesModels;
+
+    public $user_id;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($user_id)
     {
-        //
+        $this->user_id = $user_id;
     }
 
     /**
-     * Get the channels the event should broadcast on.
+     * Get the channels the event should be broadcast on.
      *
-     * @return Channel|array
+     * @return array
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return ['test-channel'];
+    }
+
+    public function broadcastWith()
+    {
+        return ['user_id' => $this->user_id];
     }
 }
