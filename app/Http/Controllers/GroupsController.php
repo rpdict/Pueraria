@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Group;
 use Illuminate\Http\Request;
 
-class UsersController extends Controller
+class GroupsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +13,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $groups = Group::where();
-        return view('functions.users', compact('groups'));
+        return view('functions.groups');
     }
 
     /**
