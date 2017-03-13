@@ -9,7 +9,9 @@
 <body>
 <button type="button" id="start" onclick="start()">start</button>
 <br>
-<h1 id="key">{{ $key }}</h1>
+{{--<h1 id="key">{{ $key }}</h1>--}}
+<h1 id="username" hidden>{{ Auth::user()->name }}</h1>
+<button type="submit" onclick="sendkey()">提交</button>
 <br>
 {{--<form action="{{action("WebsocketController@index")}}">--}}
     {{--<input name="key">--}}
@@ -17,7 +19,7 @@
 {{--</form>--}}
 
 <script>
-//    var key = document.getElementById("key").innerHTML;
+    var key = document.getElementById("username").innerHTML;
     //client.send(number.toString());
     var number = Math.round(Math.random() * 0xFFFFFF);
     var client;
@@ -39,9 +41,9 @@
             }
         };
     }
-//    function sendkey() {
-//        client.send(key);
-//    }
+    function sendkey() {
+        client.send(key);
+    }
 </script>
 </body>
 
