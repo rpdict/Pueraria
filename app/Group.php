@@ -6,13 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Group extends Model
 {
-    /**
-     * 获取该组下的所有用户。
-     */
+    protected $table = 'groups';
+
     public function users()
     {
         return $this->belongsToMany(User::class);
-        return $this->belongsToMany(Action::class);
     }
 
+    public function actions()
+    {
+        return $this->belongsToMany(Action::class);
+    }
 }

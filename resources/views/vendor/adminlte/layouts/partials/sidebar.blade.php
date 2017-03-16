@@ -37,6 +37,7 @@
             {{--<li><a href="#"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.anotherlink') }}</span></a></li>--}}
             <li {{ Request::is('auth/users') ? 'class=active' : '' }}><a href="{{ url('/auth/users') }}"><i class='fa fa-link'></i> <span>用户</span></a></li>
             <li {{ Request::is('auth/groups') ? 'class=active' : '' }}><a href="{{ url('/auth/groups') }}"><i class='fa fa-link'></i> <span>用户组</span></a></li>
+            <li {{ Request::is('auth/createPost') ? 'class=active' : '' }}><a href="{{ url('/auth/createPost') }}"><i class='fa fa-link'></i> <span>创建信息</span></a></li>
 
             <li class="treeview">
                 <a href="#"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.multilevel') }}</span> <i class="fa fa-angle-left pull-right"></i></a>

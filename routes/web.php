@@ -17,10 +17,16 @@ Route::get('/', function () {
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/auth/groups', 'GroupsController@index');
-    Route::get('/auth/users',  'UsersController@index');
-
+    Route::get('/auth/users', 'UsersController@index');
+    Route::get('/auth/createPost', 'PostController@index');
+    Route::post('/auth/createPost', 'PostController@createPost');
     //Please do not remove this if you want adminlte:route and adminlte:link commands to works correctly.
     #adminlte_routes
 });
 
-Route::get('/websocket',  'WebsocketController@index');
+Route::get('/websocket', 'WebsocketController@index');
+
+Route::get('/logout', function () {
+    Auth::logout();
+    return redirect('/');
+});
