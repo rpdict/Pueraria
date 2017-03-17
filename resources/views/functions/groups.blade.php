@@ -40,7 +40,7 @@
                             <td>
                                 <!-- Large modal -->
                                 <button type="button" class="btn btn-xs btn-primary" name="edit" data-toggle="modal"
-                                        data-target=".bs-example-modal-lg">
+                                        data-target=".bs-edit-modal-lg">
                                     <span class="fa fa-edit"></span>Edit
                                 </button>
                                 @include('functions.partials.editGroup')

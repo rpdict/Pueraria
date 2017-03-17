@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Group;
 use Illuminate\Http\Request;
-use App\Post;
+use App\Models\Post;
 
 class PostController extends Controller
 {
@@ -26,6 +27,12 @@ class PostController extends Controller
     {
         $post = Post::createPost($request->user(), $request->only('title', 'content'));
         return redirect('/auth/createPost');
+    }
+
+    public function createGroup(Request $request)
+    {
+        $group = Group::createGroup($request->only('groupname'));
+        return redirect('/auth/groups');
     }
 
     /**

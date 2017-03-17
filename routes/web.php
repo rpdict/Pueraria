@@ -20,6 +20,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/auth/users', 'UsersController@index');
     Route::get('/auth/createPost', 'PostController@index');
     Route::post('/auth/createPost', 'PostController@createPost');
+    Route::post('/auth/createGroup', 'PostController@createGroup');
     //Please do not remove this if you want adminlte:route and adminlte:link commands to works correctly.
     #adminlte_routes
 });
