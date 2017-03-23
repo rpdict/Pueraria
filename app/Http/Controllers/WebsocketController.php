@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class WebsocketController extends Controller
 {
@@ -13,7 +14,7 @@ class WebsocketController extends Controller
      */
     public function index(Request $request)
     {
-        $key = $request->input('key');
+        $key = md5(date('H:i:s'));
         return view('websocket', ['key' => $key]);
     }
 

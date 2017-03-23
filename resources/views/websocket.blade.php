@@ -4,44 +4,52 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+    <script src="{{ asset('/js/qrcode.js') }}"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/qartjs/1.0.2/qart.min.js"></script>
 </head>
 
 <body>
-{{--<button type="button" id="start" onclick="start()">start</button>--}}
+<div id="key">{{ $key }}</div>
 <br>
-{{--<h1 id="key">{{ $key }}</h1>--}}
-<h1 id="username" hidden>{{ Auth::user()->name }}</h1>
-{{--{{ Request::getClientIp() }}--}}
-<br>
-{{--<button type="submit" onclick="sendkey()">提交</button>--}}
-<br>
-{{--<form action="{{action("WebsocketController@index")}}">--}}
-    {{--<input name="key">--}}
-    {{--<button type="submit" onclick="sendkey()">提交</button>--}}
-{{--</form>--}}
+{{--<div id="qrcode"></div>--}}
+<div id="qart"></div>
 
 <script>
-    var key = document.getElementById("username").innerHTML;
-    var client;
-    function start() {
-        client = new WebSocket('ws://localhost:3000/', 'echo-protocol');
-        client.onerror = function() {
-            console.log('Connection Error');
-        };
-        client.onopen = function() {
-            console.log('WebSocket Client Connected');
-            client.send(key);
-        };
-        client.onclose = function() {
-            console.log('echo-protocol Client Closed');
-        };
-        client.onmessage = function(e) {
-            if (typeof e.data === 'string') {
-                console.log("Received: '" + e.data + "'");
-            }
-        };
-    }
-    start();
+    var key = document.getElementById("key").innerHTML;
+    var json = JSON.stringify({
+        type: 'message',
+        event: 'connect',
+        userId: key
+    });
+    var message;
+    var url;
+
+    var client = new WebSocket('ws://localhost:3000/', 'echo-protocol');
+    client.onerror = function () {
+        console.log('Connection Error');
+    };
+    client.onopen = function () {
+        console.log('WebSocket Client Connected');
+        client.send(json);
+    };
+    client.onclose = function () {
+        console.log('echo-protocol Client Closed');
+    };
+    client.onmessage = function (e) {
+        if (typeof e.data === 'string') {
+            console.log("Received: '" + e.data + "'");
+            message = JSON.parse(e.data);
+            url = 'http://127.0.0.1:3000/' + 'login?id=' + message.user;
+            console.log(url);
+//            var qrcode = new QRCode(document.getElementById("qrcode"));
+//            qrcode.makeCode(url);
+            new QArt({
+                value: url,
+                imagePath: '/img/bdf.jpg',
+            }).make(document.getElementById('qart'));
+        }
+    };
+
 
 </script>
 </body>

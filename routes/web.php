@@ -26,8 +26,4 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::get('/websocket', 'WebsocketController@index');
-
-Route::get('/logout', function () {
-    Auth::logout();
-    return redirect('/');
-});
+Route::get('/logout', 'Auth\LoginController@logout');
