@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-    <script src="{{ asset('/js/qrcode.js') }}"></script>
+    {{--<script src="{{ asset('/js/qrcode.js') }}"></script>--}}
     <script src="//cdnjs.cloudflare.com/ajax/libs/qartjs/1.0.2/qart.min.js"></script>
 </head>
 
@@ -13,6 +13,8 @@
 <br>
 {{--<div id="qrcode"></div>--}}
 <div id="qart"></div>
+<input type="text" name="input1"><br>
+<input type="text" name="input2">
 
 <script>
     var key = document.getElementById("key").innerHTML;
@@ -39,14 +41,19 @@
         if (typeof e.data === 'string') {
             console.log("Received: '" + e.data + "'");
             message = JSON.parse(e.data);
-            url = 'http://127.0.0.1:3000/' + 'login?id=' + message.user;
-            console.log(url);
+            if (message.event === 'success') {
+                url = 'http://127.0.0.1:3000/' + 'login?id=' + message.user;
+                console.log(url);
 //            var qrcode = new QRCode(document.getElementById("qrcode"));
 //            qrcode.makeCode(url);
-            new QArt({
-                value: url,
-                imagePath: '/img/bdf.jpg',
-            }).make(document.getElementById('qart'));
+                new QArt({
+                    value: url,
+                    imagePath: '/img/bdf.jpg'
+                }).make(document.getElementById('qart'));
+            } else if (message.event === 'email') {
+                document.getElementsByName("input1")[0].value = message.message;
+//                alert(message.message);
+            }
         }
     };
 
