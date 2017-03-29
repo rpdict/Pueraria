@@ -29,7 +29,7 @@
                         <tbody>
                         <tr>
                             <th>ID</th>
-                            <th>Group</th>
+                            <th>Role</th>
                             <th>Date</th>
                             <th>Actions</th>
                         </tr>
