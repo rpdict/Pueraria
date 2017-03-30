@@ -13,14 +13,10 @@
                 <div class="box-header">
                     <h3 class="box-title">Responsive Hover Table</h3>
                     <div class="box-tools">
-                        <div class="input-group input-group-sm" style="width: 10px;">
-                            <div class="input-group-btn">
-                                <button type="submit" class="btn btn-default" name="add" data-toggle="modal"
-                                        data-target=".bs-add-modal-lg"><i class="fa fa-plus"></i>
-                                </button>
-                                @include('functions.partials.createGroup')
-                            </div>
-                        </div>
+                        <button type="submit" class="btn btn-default btn-flat" name="add" data-toggle="modal"
+                                data-target=".bs-add-modal-lg"><i class="fa fa-plus"></i>
+                        </button>
+                        @include('functions.partials.createRole')
                     </div>
                 </div>
                 <!-- /.box-header -->
@@ -30,22 +26,33 @@
                         <tr>
                             <th>ID</th>
                             <th>Role</th>
+                            <th>Description</th>
                             <th>Date</th>
                             <th>Actions</th>
                         </tr>
-                        <tr>
-                            <td>1</td>
-                            <td><a href="#">王者组</a></td>
-                            <td>2016/12/13 05:02</td>
-                            <td>
-                                <!-- Large modal -->
-                                <button type="button" class="btn btn-xs btn-primary" name="edit" data-toggle="modal"
-                                        data-target=".bs-edit-modal-lg">
-                                    <span class="fa fa-edit"></span>Edit
-                                </button>
-                                @include('functions.partials.editGroup')
-                            </td>
-                        </tr>
+                        @foreach ($roles as $role)
+                            <tr>
+                                <td>{{ $role->id }}</td>
+                                <td><a href="#">{{ $role->name }}</a></td>
+                                <td>{{ $role->description }}</td>
+                                <td>{{ $role->created_at }}</td>
+                                <td>
+                                    <!-- Large modal -->
+                                    <button type="button" class="btn btn-xs btn-primary" name="edit" data-toggle="modal"
+                                            data-target=".bs-edit-modal-lg{{ $role->id }}"><span
+                                                class="fa fa-edit"></span>Edit
+                                    </button>
+                                    <form class="operate" method="post" style="display: inline"
+                                          action="{{ action('RolesController@removeRole', ['id'=>$role->id]) }}">
+                                        {!! csrf_field() !!}
+                                        <button type="submit" class="btn btn-xs btn-danger" name="delete"><span
+                                                    class="fa fa-remove"></span>Delete
+                                        </button>
+                                    </form>
+                                    @include('functions.partials.editGroup')
+                                </td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>

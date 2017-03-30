@@ -4,16 +4,22 @@
         <div class="modal-content">
             <div class="row">
                 <div class="col-md-12">
-                    <form class="form-horizontal" method="post" action="{{ url("/auth/groups") }}">
+                    <form class="form-horizontal" method="post" action="{{ url("/auth/roles") }}">
                         {!! csrf_field() !!}
                         <div class="box-header">
                             <h3 class="box-title">Input masks</h3>
                         </div>
                         <div class="box-body">
                             <div class="form-group">
-                                <label for="groupname" class="col-sm-2 control-label">GroupName</label>
+                                <label for="rolename" class="col-sm-2 control-label">RoleName</label>
                                 <div class="col-sm-10 col-md-8">
-                                    <input type="text" class="form-control" id="groupname" name="groupname">
+                                    <input type="text" class="form-control" id="rolename" name="rolename">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="description" class="col-sm-2 control-label">Description</label>
+                                <div class="col-sm-10 col-md-8">
+                                    <input type="text" class="form-control" id="description" name="description">
                                 </div>
                             </div>
                         </div>

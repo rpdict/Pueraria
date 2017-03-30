@@ -1,4 +1,4 @@
-<div class="modal fade bs-edit-modal-lg" tabindex="-1" role="dialog"
+<div class="modal fade bs-edit-modal-lg{{ $role->id }}" tabindex="-1" role="dialog"
      aria-labelledby="myLargeModalLabel">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
