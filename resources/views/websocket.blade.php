@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Document</title>
     {{--<script src="{{ asset('/js/qrcode.js') }}"></script>--}}
-    <script src="//cdnjs.cloudflare.com/ajax/libs/qartjs/1.0.2/qart.min.js"></script>
+    <script src="{{ asset('/js/qart.js') }}"></script>
 </head>
 
 <body>

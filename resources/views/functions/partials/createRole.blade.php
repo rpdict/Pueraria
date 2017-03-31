@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="row">
                 <div class="col-md-12">
-                    <form class="form-horizontal" method="post" action="{{ url("/auth/roles") }}">
+                    <form class="form-horizontal" method="post" action="{{ action('RolesController@createRole') }}">
                         {!! csrf_field() !!}
                         <div class="box-header">
                             <h3 class="box-title">Input masks</h3>

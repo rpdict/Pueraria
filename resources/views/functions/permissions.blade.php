@@ -42,12 +42,10 @@
                                             data-target=".bs-edit-modal-lg{{ $role->id }}"><span
                                                 class="fa fa-edit"></span>Edit
                                     </button>
-                                    @include('functions.partials.editRole')
                                     <button type="button" class="btn btn-xs btn-warning" name="edit" data-toggle="modal"
                                             data-target=".bs-permission-modal-lg{{ $role->id }}"><span
                                                 class="fa fa-wrench"></span>Permission
                                     </button>
-                                    @include('functions.partials.rolePermissions')
                                     <form class="operate" method="post" style="display: inline"
                                           action="{{ action('RolesController@removeRole', ['id'=>$role->id]) }}">
                                         {!! csrf_field() !!}
@@ -55,6 +53,8 @@
                                                     class="fa fa-remove"></span>Delete
                                         </button>
                                     </form>
+                                    @include('functions.partials.createRole')
+                                    @include('functions.partials.rolePermissions')
                                 </td>
                             </tr>
                         @endforeach
@@ -68,15 +68,15 @@
     </div>
 @endsection
 @section('page-script')
-    {{--<script src="{{ asset('/plugins/jquery.inputmask.js') }}"></script>--}}
-    {{--<script src="{{ asset('/plugins/jquery.inputmask.date.extensions.js') }}"></script>--}}
-    {{--<script src="{{ asset('/plugins/jquery.inputmask.extensions.js') }}" type="text/javascript"></script>--}}
-    {{--<script type="text/javascript">--}}
-        {{--//Datemask dd/mm/yyyy--}}
-        {{--$("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});--}}
-        {{--//Datemask2 mm/dd/yyyy--}}
-        {{--$("#datemask2").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});--}}
-        {{--//Money Euro--}}
-        {{--$("[data-mask]").inputmask();--}}
-    {{--</script>--}}
+    <script src="{{ asset('/plugins/jquery.inputmask.js') }}"></script>
+    <script src="{{ asset('/plugins/jquery.inputmask.date.extensions.js') }}"></script>
+    <script src="{{ asset('/plugins/jquery.inputmask.extensions.js') }}" type="text/javascript"></script>
+    <script type="text/javascript">
+        //Datemask dd/mm/yyyy
+        $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+        //Datemask2 mm/dd/yyyy
+        $("#datemask2").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
+        //Money Euro
+        $("[data-mask]").inputmask();
+    </script>
 @endsection

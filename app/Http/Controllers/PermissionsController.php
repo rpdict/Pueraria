@@ -3,13 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Role;
-use App\Models\User;
-use App\Models\Permission;
-use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
 
-class RolesController extends Controller
+class PermissionsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +13,7 @@ class RolesController extends Controller
      */
     public function index()
     {
-        $roles = DB::table('roles')->get();
-        return view('functions.roles', ['roles' => $roles]);
+        //
     }
 
     /**
@@ -27,16 +21,9 @@ class RolesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function createRole(Request $request)
+    public function create()
     {
-        $name = $request->input('rolename');
-        $description = $request->input('description');
-        $role = new Role();
-        $role->name         = $name;
-        $role->display_name = 'Project '.$name; // optional
-        $role->description  = $description; // optional
-        $role->save();
-        return redirect('/auth/roles');
+        //
     }
 
     /**
@@ -79,14 +66,9 @@ class RolesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function editRole(Request $request, $id)
+    public function update(Request $request, $id)
     {
-        $name = $request->input('rolename');
-        $description = $request->input('description');
-        DB::table('roles')
-            ->where('id', $id)
-            ->update(['name' => $name, 'description' => $description]);
-        return redirect("/auth/roles");
+        //
     }
 
     /**
@@ -95,9 +77,8 @@ class RolesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function removeRole($id)
+    public function destroy($id)
     {
-        DB::table('roles')->where('id', '=', $id)->delete();
-        return redirect("/auth/roles");
+        //
     }
 }

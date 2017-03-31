@@ -19,7 +19,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/auth/roles', 'RolesController@index');
     Route::post('/auth/roles', 'RolesController@createRole');
 
+    Route::post('/auth/roles/edit/{id}', 'RolesController@editRole');
     Route::post('/auth/roles/removeRole/{id}', 'RolesController@removeRole');
+
+    Route::get('auth/permissions', 'PermissionsController@index');
 
     Route::get('/auth/users', 'UsersController@index');
     Route::get('/auth/createPost', 'PostController@index');

@@ -36,7 +36,8 @@
             <li {{ Request::is('home') ? 'class=active' : '' }}><a href="{{ url('/home') }}"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.home') }}</span></a></li>
             {{--<li><a href="#"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.anotherlink') }}</span></a></li>--}}
             <li {{ Request::is('auth/users') ? 'class=active' : '' }}><a href="{{ url('/auth/users') }}"><i class='fa fa-link'></i> <span>用户</span></a></li>
-            <li {{ Request::is('auth/groups') ? 'class=active' : '' }}><a href="{{ url('/auth/roles') }}"><i class='fa fa-link'></i> <span>用户组</span></a></li>
+            <li {{ Request::is('auth/roles') ? 'class=active' : '' }}><a href="{{ url('/auth/roles') }}"><i class='fa fa-link'></i> <span>用户组</span></a></li>
+            <li {{ Request::is('auth/permissions') ? 'class=active' : '' }}><a href="{{ url('/auth/permissions') }}"><i class='fa fa-link'></i> <span>权限</span></a></li>
             <li {{ Request::is('auth/createPost') ? 'class=active' : '' }}><a href="{{ url('/auth/createPost') }}"><i class='fa fa-link'></i> <span>创建信息</span></a></li>
 
             <li class="treeview">
