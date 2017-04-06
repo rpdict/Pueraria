@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+    <div id="QRkey">{{ $QRkey }}</div>
     <div id="key">{{ $key }}</div>
     <body class="hold-transition login-page">
     <div id="app">
@@ -25,16 +26,15 @@
             @endif
 
             <div class="login-box-body">
-                {{--<p class="login-box-msg"> {{ trans('adminlte_lang::message.siginsession') }} </p>--}}
-                <p class="login-box-msg"><div id="qart"></div></p>
+                <p class="login-box-msg"> {{ trans('adminlte_lang::message.siginsession') }} </p>
                 <form action="{{ url('/login') }}" method="post">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     {{--<login-input-field--}}
-                            {{--name="{{ config('auth.providers.users.field','email') }}"--}}
-                            {{--domain="{{ config('auth.defaults.domain','') }}"--}}
+                    {{--name="{{ config('auth.providers.users.field','email') }}"--}}
+                    {{--domain="{{ config('auth.defaults.domain','') }}"--}}
                     {{--></login-input-field>--}}
                     <div class="form-group has-feedback">
-                        <input type="email" class="form-control"
+                        <input type="email" class="form-control" onkeyup="keydown()" id="email"
                                placeholder="{{ trans('adminlte_lang::message.email') }}" name="email"/>
                         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                     </div>
@@ -81,16 +81,23 @@
         });
     </script>
 
-    <script src="{{ asset('/js/qart.js') }}"></script>
     <script>
         var key = document.getElementById("key").innerHTML;
-        var json = JSON.stringify({
-            type: 'message',
-            event: 'connect',
-            userId: key
-        });
-        var message;
-        var url;
+        var QRkey = document.getElementById("QRkey").innerHTML;
+
+        function keydown() {
+            var email = document.getElementById("email").value;
+            // var password = document.getElementById("password").value;
+            console.log(email);
+            var json = JSON.stringify({
+                type: 'message',
+                event: 'email',
+                userId: key,
+                QR: QRkey,
+                email: email
+            });
+            client.send(json);
+        }
 
         var client = new WebSocket('ws://localhost:3000/', 'echo-protocol');
         client.onerror = function () {
@@ -98,6 +105,11 @@
         };
         client.onopen = function () {
             console.log('WebSocket Client Connected');
+            var json = JSON.stringify({
+                type: 'message',
+                event: 'connect',
+                userId: key
+            });
             client.send(json);
         };
         client.onclose = function () {
@@ -106,24 +118,8 @@
         client.onmessage = function (e) {
             if (typeof e.data === 'string') {
                 console.log("Received: '" + e.data + "'");
-                message = JSON.parse(e.data);
-                if (message.event === 'success') {
-                    url = 'http://192.168.10.10/' + 'QRlogin/' + message.user;
-                    console.log(url);
-//            var qrcode = new QRCode(document.getElementById("qrcode"));
-//            qrcode.makeCode(url);
-                    new QArt({
-                        value: url,
-                        imagePath: '/img/bdf.jpg'
-                    }).make(document.getElementById('qart'));
-                } else if (message.event === 'email') {
-                    document.getElementsByName("email")[0].value = message.message;
-//                alert(message.message);
-                }
             }
         };
-
-
     </script>
     </body>
 @endsection

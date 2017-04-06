@@ -10,6 +10,10 @@
 
 <body>
 <div id="key">{{ $key }}</div>
+{{--@foreach ($values as $value)--}}
+    {{--<div>{{ dump($value) }}</div>--}}
+{{--@endforeach--}}
+{{--{{ dump($values) }}--}}
 <br>
 {{--<div id="qrcode"></div>--}}
 <div id="qart"></div>

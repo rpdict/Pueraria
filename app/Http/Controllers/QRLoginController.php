@@ -3,22 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class WebsocketController extends Controller
+class QRLoginController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, $id)
     {
+        $QRkey = $id;
         $key = md5(date('H:i:s'));
-//        $values = $request->session()->all();
-        return view('websocket', ['key' => $key]);
-//        return view('websocket', compact('values'));
-
+        return view('adminlte::auth.QRlogin', ['QRkey' => $QRkey, 'key' => $key]);
     }
 
     /**

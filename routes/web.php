@@ -35,4 +35,5 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::get('/websocket', 'WebsocketController@index');
+Route::get('/QRlogin/{key}', 'QRLoginController@index');
 Route::get('/logout', 'Auth\LoginController@logout');
