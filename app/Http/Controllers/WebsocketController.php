@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Events\QRLoginedEvent;
+use Illuminate\Support\Facades\Redis;
 
 class WebsocketController extends Controller
 {
@@ -19,6 +21,11 @@ class WebsocketController extends Controller
         return view('websocket', ['key' => $key]);
 //        return view('websocket', compact('values'));
 
+    }
+
+    public function redis(){
+//        event(new QRLoginedEvent('111', '666'));
+        Redis::publish('test-channel', json_encode(['foo' => 'bar']));
     }
 
     /**

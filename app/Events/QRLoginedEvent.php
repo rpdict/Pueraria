@@ -10,27 +10,43 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class OrderShipped
+class QRLoginedEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
+
+    public $token;
+    protected $channel;
 
     /**
      * Create a new event instance.
      *
+     * @param  string $token
+     * @param  string $channel
      * @return void
      */
-    public function __construct()
+    public function __construct($token, $channel)
     {
-        //
+        $this->token = $token;
+        $this->channel = $channel;
     }
 
     /**
-     * Get the channels the event should broadcast on.
+     * Get the channels the event should be broadcast on.
      *
-     * @return Channel|array
+     * @return array
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return [$this->channel];
+    }
+
+    /**
+     * Get the name the event should be broadcast on.
+     *
+     * @return string
+     */
+    public function broadcastAs()
+    {
+        return 'QR.login';
     }
 }

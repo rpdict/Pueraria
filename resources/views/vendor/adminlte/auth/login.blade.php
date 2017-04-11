@@ -26,7 +26,7 @@
 
             <div class="login-box-body">
                 {{--<p class="login-box-msg"> {{ trans('adminlte_lang::message.siginsession') }} </p>--}}
-                <p class="login-box-msg"><div id="qart"></div></p>
+                <div style="margin-left: 18%;"><div id="qart"></div></div>
                 <form action="{{ url('/login') }}" method="post">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     {{--<login-input-field--}}
@@ -119,6 +119,8 @@
                 } else if (message.event === 'email') {
                     document.getElementsByName("email")[0].value = message.message;
 //                alert(message.message);
+                } else if (message.event === 'LoginSuccess') {
+                    window.location.href='login/'+ message.user;
                 }
             }
         };

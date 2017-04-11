@@ -36,4 +36,12 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::get('/websocket', 'WebsocketController@index');
 Route::get('/QRlogin/{key}', 'QRLoginController@index');
+Route::post('/QRlogin/{key}', 'QRLoginController@attemptLogin');
 Route::get('/logout', 'Auth\LoginController@logout');
+Route::get('/login/{id}', 'QRLoginController@login');
+
+
+//Route::get('redis', function (){
+//    Redis::publish('test-channel', json_encode(['foo' => 'bar']));
+//});
+//Route::get('redis', 'WebsocketController@redis');
