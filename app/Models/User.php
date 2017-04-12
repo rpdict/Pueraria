@@ -30,14 +30,6 @@ class User extends Authenticatable
     ];
 
     /**
-     * 获取该用户所属的组。
-     */
-    public function groups()
-    {
-        return $this->belongsToMany(Group::class);
-    }
-
-    /**
      * 获取这个作者下的所有文章。
      */
     public function posts()

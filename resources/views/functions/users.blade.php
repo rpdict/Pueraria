@@ -20,16 +20,16 @@
                         <tr>
                             <th>ID</th>
                             <th>User</th>
-                            <th>Group</th>
+                            <th>Email</th>
                             <th>Date</th>
                             <th>Actions</th>
                         </tr>
-                        @foreach ($posts as $post)
+                        @foreach ($users as $user)
                             <tr>
-                                <td>{{ $post->id }}</td>
-                                <td>{{ $post->author->name }}</td>
-                                <td><a href="#">{{ $post->author->name }}</a></td>
-                                <td>{{ $post->created_at->format('Y/m/d H:i') }}</td>
+                                <td>{{ $user->id }}</td>
+                                <td>{{ $user->name }}</td>
+                                <td><a href="#">{{ $user->email }}</a></td>
+                                <td>{{ $user->created_at }}</td>
                                 <td>
                                     <!-- Large modal -->
                                     <button type="button" class="btn btn-xs btn-primary" name="edit" data-toggle="modal"

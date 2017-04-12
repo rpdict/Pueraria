@@ -36,7 +36,7 @@ class RolesController extends Controller
         $role->display_name = 'Project '.$name; // optional
         $role->description  = $description; // optional
         $role->save();
-        return redirect('/auth/roles');
+        return back()->withInput();
     }
 
     /**
@@ -86,7 +86,7 @@ class RolesController extends Controller
         DB::table('roles')
             ->where('id', $id)
             ->update(['name' => $name, 'description' => $description]);
-        return redirect("/auth/roles");
+        return back()->withInput();
     }
 
     /**
@@ -98,6 +98,6 @@ class RolesController extends Controller
     public function removeRole($id)
     {
         DB::table('roles')->where('id', '=', $id)->delete();
-        return redirect("/auth/roles");
+        return back()->withInput();
     }
 }

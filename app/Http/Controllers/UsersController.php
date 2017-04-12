@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Group;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
 {
@@ -14,8 +15,8 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $groups = Group::where();
-        return view('functions.users', compact('groups'));
+        $users = DB::table('users')->get();
+        return view('functions.users', compact('users'));
     }
 
     /**

@@ -40,6 +40,10 @@ Route::post('/QRlogin/{key}', 'QRLoginController@attemptLogin');
 Route::get('/logout', 'Auth\LoginController@logout');
 Route::get('/login/{id}', 'QRLoginController@login');
 
+//Route::get('/666', function (){
+//    return view('functions.partials.success');
+//});
+
 
 //Route::get('redis', function (){
 //    Redis::publish('test-channel', json_encode(['foo' => 'bar']));

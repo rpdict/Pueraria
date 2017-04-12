@@ -32,9 +32,9 @@ class QRLoginController extends Controller
                 'id' => $id
                 ]);
             Redis::publish('login-channel', $message);
-            return '666';
+            return view('functions.partials.success');
         } else {
-            return '滚';
+            return view('functions.partials.fail');
         }
     }
 
