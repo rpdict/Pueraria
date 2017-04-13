@@ -33,12 +33,13 @@
         <ul class="sidebar-menu">
             <li class="header">{{ trans('adminlte_lang::message.header') }}</li>
             <!-- Optionally, you can add icons to the links -->
-            <li {{ Request::is('home') ? 'class=active' : '' }}><a href="{{ url('/home') }}"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.home') }}</span></a></li>
+            <li {{ Request::is('home') ? 'class=active' : '' }}><a href="{{ url('/home') }}"><i class='fa fa-home'></i> <span>{{ trans('adminlte_lang::message.home') }}</span></a></li>
             {{--<li><a href="#"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.anotherlink') }}</span></a></li>--}}
-            <li {{ Request::is('auth/users') ? 'class=active' : '' }}><a href="{{ url('/auth/users') }}"><i class='fa fa-link'></i> <span>用户</span></a></li>
-            <li {{ Request::is('auth/roles') ? 'class=active' : '' }}><a href="{{ url('/auth/roles') }}"><i class='fa fa-link'></i> <span>用户组</span></a></li>
-            <li {{ Request::is('auth/permissions') ? 'class=active' : '' }}><a href="{{ url('/auth/permissions') }}"><i class='fa fa-link'></i> <span>权限</span></a></li>
-            <li {{ Request::is('auth/createPost') ? 'class=active' : '' }}><a href="{{ url('/auth/createPost') }}"><i class='fa fa-link'></i> <span>创建信息</span></a></li>
+            <li {{ Request::is('auth/users') ? 'class=active' : '' }}><a href="{{ url('/auth/users') }}"><i class='fa fa-user'></i> <span>用户</span></a></li>
+            <li {{ Request::is('auth/roles') ? 'class=active' : '' }}><a href="{{ url('/auth/roles') }}"><i class='fa fa-users'></i> <span>用户组</span></a></li>
+            <li {{ Request::is('auth/permissions') ? 'class=active' : '' }}><a href="{{ url('/auth/permissions') }}"><i class='fa fa-wrench'></i> <span>权限</span></a></li>
+{{--            <li {{ Request::is('auth/createPost') ? 'class=active' : '' }}><a href="{{ url('/auth/createPost') }}"><i class='fa fa-link'></i> <span>创建信息</span></a></li>--}}
+            <li {{ Request::is('auth/contacts') ? 'class=active' : '' }}><a href="{{ url('/auth/contacts') }}"><i class='fa fa-book'></i> <span>联系人</span></a></li>
 
             <li class="treeview">
                 <a href="#"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.multilevel') }}</span> <i class="fa fa-angle-left pull-right"></i></a>

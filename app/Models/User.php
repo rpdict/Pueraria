@@ -36,4 +36,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class);
     }
+
+    /**
+     * 获取这个作者下的所有联系人。
+     */
+    public function contacts()
+    {
+        return $this->hasMany(Contact::class);
+    }
 }

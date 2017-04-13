@@ -114,9 +114,10 @@
             @else
                 <div class="box box-widget widget-user">
                     <!-- Add the bg color to the header using any of the bg-* classes -->
-                    <div class="widget-user-header bg-aqua-active">
+                    <div class="widget-user-header bg-aqua-active gradient-wrap">
                         <h3 class="widget-user-username">Alexander Pierce</h3>
                         <h5 class="widget-user-desc">Founder &amp; CEO</h5>
+                        <img crossorigin="anonymous" class="img-circle" src="{{ Gravatar::get($user->email) }}" alt="User Avatar" hidden>
                     </div>
                     <div class="widget-user-image">
                         <img class="img-circle" src="{{ Gravatar::get($user->email) }}" alt="User Avatar">

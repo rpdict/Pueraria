@@ -1,9 +1,13 @@
 @extends('adminlte::layouts.app')
 
 @section('htmlheader_title')
-    {{ trans('adminlte_lang::message.home') }}
+    {{--{{ trans('adminlte_lang::message.home') }}--}}
+    Roles
 @endsection
 
+@section('contentheader_title')
+    Roles
+@endsection
 
 @section('main-content')
     <!-- Your Page Content Here -->

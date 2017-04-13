@@ -16,17 +16,21 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/auth/roles', 'RolesController@index');
-    Route::post('/auth/roles', 'RolesController@createRole');
+    Route::get('auth/roles', 'RolesController@index');
+    Route::post('auth/roles', 'RolesController@createRole');
 
-    Route::post('/auth/roles/edit/{id}', 'RolesController@editRole');
-    Route::post('/auth/roles/removeRole/{id}', 'RolesController@removeRole');
+    Route::post('auth/roles/edit/{id}', 'RolesController@editRole');
+    Route::post('auth/roles/removeRole/{id}', 'RolesController@removeRole');
 
     Route::get('auth/permissions', 'PermissionsController@index');
 
-    Route::get('/auth/users', 'UsersController@index');
-    Route::get('/auth/createPost', 'PostController@index');
-    Route::post('/auth/createPost', 'PostController@createPost');
+    Route::get('auth/users', 'UsersController@index');
+    Route::get('auth/createPost', 'PostController@index');
+    Route::post('auth/createPost', 'PostController@createPost');
+
+    Route::get('auth/contacts', 'ContactsController@index');
+    Route::post('auth/contacts', 'ContactsController@createContact');
+
 //    Route::post('/auth/createGroup', 'PostController@createGroup');
     Route::post('/auth/createGroup', 'GroupsController@createGroup');
     Route::post('/auth/createGroup', 'GroupsController@createUser');
