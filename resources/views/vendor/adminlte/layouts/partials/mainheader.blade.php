@@ -149,15 +149,16 @@
                                 </div>
                                 <div class="pull-right">
                                     <a href="{{ url('/logout') }}" class="btn btn-default btn-flat"
-                                       onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
+                                       {{--onclick="event.preventDefault();--}}
+                                                 {{--document.getElementById('logout-form').submit();"--}}
+                                    >
                                         {{ trans('adminlte_lang::message.signout') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                                        {{ csrf_field() }}
-                                        <input type="submit" value="logout" style="display: none;">
-                                    </form>
+                                    {{--<form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">--}}
+                                        {{--{{ csrf_field() }}--}}
+                                        {{--<input type="submit" value="logout" style="display: none;">--}}
+                                    {{--</form>--}}
 
                                 </div>
                             </li>

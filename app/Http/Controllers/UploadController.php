@@ -2,46 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\QRLoginedEvent;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redis;
-use Illuminate\Support\Facades\DB;
 
-class QRLoginController extends Controller
+class UploadController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, $id)
+    public function index()
     {
-        $QRkey = $id;
-        $key = md5(uniqid());
-        return view('adminlte::auth.QRlogin', ['QRkey' => $QRkey, 'key' => $key]);
-    }
-
-    public function attemptLogin(Request $request, $key)
-    {
-        if (Auth::once(['email' => $request->input('email'), 'password' => $request->input('password')])) {
-            $id = base64_encode(Auth::id());
-            $message = json_encode([
-                'QRkey' => $key,
-                'event' => 'success',
-                'id' => $id
-                ]);
-            Redis::publish('login-channel', $message);
-            return view('functions.partials.success');
-        } else {
-            return view('functions.partials.fail');
-        }
-    }
-
-    public function login($id){
-        $id = base64_decode($id);
-        Auth::loginUsingId($id);
-        return redirect('/home');
+//        $roles = DB::table('roles')->get();
+        return view('functions.upload');
     }
 
     /**

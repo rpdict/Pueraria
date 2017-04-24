@@ -7,6 +7,10 @@
 
 @section('contentheader_title')
     Roles
+    <button type="submit" class="btn btn-default btn-flat" name="add" data-toggle="modal"
+            data-target=".bs-add-modal-lg"><i class="fa fa-plus"></i>
+    </button>
+    @include('functions.partials.createRole')
 @endsection
 
 @section('main-content')
@@ -17,10 +21,13 @@
                 <div class="box-header">
                     <h3 class="box-title">Responsive Hover Table</h3>
                     <div class="box-tools">
-                        <button type="submit" class="btn btn-default btn-flat" name="add" data-toggle="modal"
-                                data-target=".bs-add-modal-lg"><i class="fa fa-plus"></i>
-                        </button>
-                        @include('functions.partials.createRole')
+                        <div class="input-group input-group-sm" style="width: 150px;">
+                            <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+
+                            <div class="input-group-btn">
+                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- /.box-header -->
@@ -72,15 +79,36 @@
     </div>
 @endsection
 @section('page-script')
-    {{--<script src="{{ asset('/plugins/jquery.inputmask.js') }}"></script>--}}
-    {{--<script src="{{ asset('/plugins/jquery.inputmask.date.extensions.js') }}"></script>--}}
-    {{--<script src="{{ asset('/plugins/jquery.inputmask.extensions.js') }}" type="text/javascript"></script>--}}
-    {{--<script type="text/javascript">--}}
-        {{--//Datemask dd/mm/yyyy--}}
-        {{--$("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});--}}
-        {{--//Datemask2 mm/dd/yyyy--}}
-        {{--$("#datemask2").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});--}}
-        {{--//Money Euro--}}
-        {{--$("[data-mask]").inputmask();--}}
-    {{--</script>--}}
+    <script>
+        function moveselect(obj, target, all) {
+            if (!all) all = 0;
+            if (typeof(obj) != "object") obj = eval("document.all." + obj);
+            target = eval("document.all." + target);
+            if (all == 0) {
+                while (obj.selectedIndex > -1) {
+//                    alert(obj.selectedIndex);
+                    mot = obj.options[obj.selectedIndex].text;
+                    mov = obj.options[obj.selectedIndex].value;
+                    obj.remove(obj.selectedIndex);
+                    var newoption = document.createElement("OPTION");
+                    newoption.text = mot;
+                    newoption.value = mov;
+                    target.add(newoption);
+                }
+            } else {
+//                alert(obj.options.length);
+                for (i = 0; i < obj.length; i++) {
+                    mot = obj.options.text;
+                    mov = obj.options.value;
+                    var newoption = document.createElement("OPTION");
+                    newoption.text = mot;
+                    newoption.value = mov;
+                    target.add(newoption);
+                }
+                obj.options.length = 0
+
+            }
+
+        }
+    </script>
 @endsection

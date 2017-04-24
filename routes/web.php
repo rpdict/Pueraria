@@ -18,11 +18,15 @@ Route::get('/', function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::get('auth/roles', 'RolesController@index');
     Route::post('auth/roles', 'RolesController@createRole');
-
     Route::post('auth/roles/edit/{id}', 'RolesController@editRole');
     Route::post('auth/roles/removeRole/{id}', 'RolesController@removeRole');
+    Route::post('auth/roles/rolePermissions/{id}', 'RolesController@rolePermissions');
 
     Route::get('auth/permissions', 'PermissionsController@index');
+    Route::post('auth/permissions', 'PermissionsController@createPermission');
+    Route::post('auth/permissions/edit/{id}', 'PermissionsController@editPermission');
+    Route::post('auth/permissions/removePermission/{id}', 'PermissionsController@removePermission');
+
 
     Route::get('auth/users', 'UsersController@index');
     Route::get('auth/createPost', 'PostController@index');
@@ -34,6 +38,9 @@ Route::group(['middleware' => 'auth'], function () {
 //    Route::post('/auth/createGroup', 'PostController@createGroup');
     Route::post('/auth/createGroup', 'GroupsController@createGroup');
     Route::post('/auth/createGroup', 'GroupsController@createUser');
+
+    Route::get('auth/upload', 'UploadController@index');
+    Route::post('auth/upload', 'UploadController@upload');
     //Please do not remove this if you want adminlte:route and adminlte:link commands to works correctly.
     #adminlte_routes
 });
@@ -53,3 +60,7 @@ Route::get('/login/{id}', 'QRLoginController@login');
 //    Redis::publish('test-channel', json_encode(['foo' => 'bar']));
 //});
 //Route::get('redis', 'WebsocketController@redis');
+
+Route::get('/vue', function (){
+    return view('functions.vue');
+});

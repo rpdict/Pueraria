@@ -29,8 +29,8 @@ class RolesController extends Controller
      */
     public function createRole(Request $request)
     {
-        $name = $request->input('rolename');
-        $description = $request->input('description');
+        $name               = $request->input('rolename');
+        $description        = $request->input('description');
         $role = new Role();
         $role->name         = $name;
         $role->display_name = 'Project '.$name; // optional
@@ -40,14 +40,15 @@ class RolesController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 创建角色的权限
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function rolePermissions(Request $request, $id)
     {
-        //
+        return var_dump($request->get('DS'.$id));
     }
 
     /**

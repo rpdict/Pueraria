@@ -30,7 +30,7 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        $key = md5(date('H:i:s'));
+        $key = md5(uniqid());
         return view('adminlte::auth.login', ['key' => $key]);
     }
 

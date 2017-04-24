@@ -41,5 +41,5 @@ mix.js('resources/assets/js/app.js', 'public/js')
    .copy('node_modules/icheck/skins/square/blue.png','public/css')
    .copy('node_modules/icheck/skins/square/blue@2x.png','public/css')
    .copy('node_modules/weui/dist/style/weui.css','public/plugins')
-   .copy('node_modules/grade-js/docs/dist/grade.js','public/plugins')
+   .copy('node_modules/grade-js/docs/dist/grade.js','public/plugins');
 

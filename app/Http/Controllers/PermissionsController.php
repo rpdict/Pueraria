@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Permission;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PermissionsController extends Controller
 {
@@ -13,7 +15,8 @@ class PermissionsController extends Controller
      */
     public function index()
     {
-        //
+        $permissions = DB::table('permissions')->get();
+        return view('functions.permissions', ['permissions' => $permissions]);
     }
 
     /**
@@ -21,42 +24,15 @@ class PermissionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function createPermission(Request $request)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $createPost = new Permission();
+        $createPost->name         = $request->input('name');
+        $createPost->display_name = $request->input('display_name'); // optional
+// Allow a user to...
+        $createPost->description  = $request->input('description'); // optional
+        $createPost->save();
+        return back()->withInput();
     }
 
     /**
@@ -66,9 +42,15 @@ class PermissionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function editPermission(Request $request, $id)
     {
-        //
+        $name = $request->input('name');
+        $display_name = $request->input('display_name');
+        $description = $request->input('description');
+        DB::table('permissions')
+            ->where('id', $id)
+            ->update(['name' => $name, 'display_name' => $display_name, 'description' => $description]);
+        return back()->withInput();
     }
 
     /**
@@ -77,8 +59,9 @@ class PermissionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function removePermission($id)
     {
-        //
+        DB::table('permissions')->where('id', '=', $id)->delete();
+        return back()->withInput();
     }
 }

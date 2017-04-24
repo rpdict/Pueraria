@@ -16,7 +16,7 @@ class ContactsController extends Controller
      */
     public function index()
     {
-        $contacts = DB::table('contacts')->where('id', Auth::id())->get();
+        $contacts = DB::table('contacts')->where('author_id', Auth::id())->get();
         return view('functions.contacts', ['contacts' => $contacts]);
     }
 

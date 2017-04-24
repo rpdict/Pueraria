@@ -44,4 +44,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Contact::class);
     }
+
+    /**
+     * 获取这个作者下的所有上传对象。
+     */
+    public function uploads()
+    {
+        return $this->hasMany(Upload::class);
+    }
 }
