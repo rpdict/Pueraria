@@ -41,6 +41,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('auth/upload', 'UploadController@index');
     Route::post('auth/upload', 'UploadController@upload');
+    Route::post('auth/upload/edit/{id}', 'UploadController@update');
+    Route::post('auth/upload/removeUpload/{id}', 'UploadController@destroy');
     //Please do not remove this if you want adminlte:route and adminlte:link commands to works correctly.
     #adminlte_routes
 });

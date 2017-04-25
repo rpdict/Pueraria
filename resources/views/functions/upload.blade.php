@@ -15,6 +15,15 @@
 
 @section('main-content')
     <!-- Your Page Content Here -->
+    @if (session('exist'))
+        <div class="alert alert-danger">
+            {{ session('exist') }}
+        </div>
+    @elseif (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="row">
         <div class="col-xs-12">
             <div class="box box-primary">
@@ -37,35 +46,37 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
-                            <th>Display Name</th>
                             <th>Description</th>
+                            <th>Size</th>
+                            <th>Path</th>
                             <th>Date</th>
                             <th>Actions</th>
                         </tr>
-                        {{--@foreach ($permissions as $permission)--}}
-                            {{--<tr>--}}
-                                {{--<td>{{ $permission->id }}</td>--}}
-                                {{--<td><a href="#">{{ $permission->name }}</a></td>--}}
-                                {{--<td>{{ $permission->display_name }}</td>--}}
-                                {{--<td>{{ $permission->description }}</td>--}}
-                                {{--<td>{{ $permission->created_at }}</td>--}}
-                                {{--<td>--}}
-                                    {{--<!-- Large modal -->--}}
-                                    {{--<button type="button" class="btn btn-xs btn-primary" name="edit" data-toggle="modal"--}}
-                                            {{--data-target=".bs-edit-modal-lg{{ $permission->id }}"><span--}}
-                                                {{--class="fa fa-edit"></span>Edit--}}
-                                    {{--</button>--}}
-                                    {{--@include('functions.partials.editPermissions')--}}
-                                    {{--<form class="operate" method="post" style="display: inline"--}}
-                                          {{--action="{{ action('PermissionsController@removePermission', ['id'=>$permission->id]) }}">--}}
-                                        {{--{!! csrf_field() !!}--}}
-                                        {{--<button type="submit" class="btn btn-xs btn-danger" name="delete"><span--}}
-                                                    {{--class="fa fa-remove"></span>Delete--}}
-                                        {{--</button>--}}
-                                    {{--</form>--}}
-                                {{--</td>--}}
-                            {{--</tr>--}}
-                        {{--@endforeach--}}
+                        @foreach ($uploads as $upload)
+                            <tr>
+                                <td>{{ $upload->id }}</td>
+                                <td><a href="#">{{ $upload->name }}</a></td>
+                                <td>{{ $upload->description }}</td>
+                                <td name="size">{{ $upload->size }}</td>
+                                <td>{{ $upload->path }}</td>
+                                <td>{{ $upload->created_at }}</td>
+                                <td>
+                                    <!-- Large modal -->
+                                    <button type="button" class="btn btn-xs btn-primary" name="edit" data-toggle="modal"
+                                            data-target=".bs-edit-modal-lg{{ $upload->id }}"><span
+                                                class="fa fa-edit"></span>Edit
+                                    </button>
+                                    @include('functions.partials.editUpload')
+                                    <form class="operate" method="post" style="display: inline"
+                                          action="{{ action('UploadController@destroy', ['id'=>$upload->id]) }}">
+                                        {!! csrf_field() !!}
+                                        <button type="submit" class="btn btn-xs btn-danger" name="delete"><span
+                                                    class="fa fa-remove"></span>Delete
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -76,4 +87,26 @@
     </div>
 @endsection
 @section('page-script')
+    <script>
+        var sizeName = document.getElementsByName("size");
+        for (var j = 0; j < sizeName.length; j++) {
+            var size = sizeName[j].innerHTML;
+            sizeName[j].innerHTML = bytesToSize(size);
+        }
+
+        function bytesToSize(bytes) {
+            if (bytes === 0) return '0 B';
+
+            var k = 1024;
+
+            sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+
+            i = Math.floor(Math.log(bytes) / Math.log(k));
+
+//            return (bytes / Math.pow(k, i)).toPrecision(4) + ' ' + sizes[i];
+            //toPrecision(3) 后面保留一位小数，如1.0GB
+//            return (bytes / Math.pow(k, i)).toPrecision(3) + ' ' + sizes[i];
+            return (bytes / Math.pow(k, i)).toPrecision(3) + ' ' + sizes[i];
+        }
+    </script>
 @endsection

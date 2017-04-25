@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="row">
                 <div class="col-md-12">
-                    <form class="form-horizontal" method="post" action="{{ action('UploadController@upload') }}">
+                    <form class="form-horizontal" method="post" action="{{ action('UploadController@upload') }}" enctype="multipart/form-data">
                         {!! csrf_field() !!}
                         <div class="box-header">
                             <h3 class="box-title">Input masks</h3>
@@ -31,7 +31,7 @@
                             <div class="form-group">
                                 <label for="inputFile" class="col-sm-2 control-label">Input File</label>
                                 <div class="col-sm-10 col-md-8">
-                                    <input type="file" id="inputFile">
+                                    <input type="file" id="inputFile" name="file">
                                 </div>
                                 {{--<p class="help-block">Example block-level help text here.</p>--}}
                             </div>
