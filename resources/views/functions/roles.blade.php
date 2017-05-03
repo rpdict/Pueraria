@@ -14,6 +14,9 @@
 @endsection
 
 @section('main-content')
+    {{--@foreach( $role_permissions as $role_permission )--}}
+    {{--@endforeach--}}
+{{--    {{ var_dump(json_decode($role_permissions)) }}--}}
     <!-- Your Page Content Here -->
     <div class="row">
         <div class="col-xs-12">
@@ -86,17 +89,27 @@
             target = eval("document.all." + target);
             if (all == 0) {
                 while (obj.selectedIndex > -1) {
-//                    alert(obj.selectedIndex);
+                  //  alert(obj.selectedIndex);
                     mot = obj.options[obj.selectedIndex].text;
                     mov = obj.options[obj.selectedIndex].value;
+                    moid = obj.options[obj.selectedIndex].id;
                     obj.remove(obj.selectedIndex);
+                    if ($('#i'+moid).length>0) {
+                      $('#i'+moid).remove();
+                    }
                     var newoption = document.createElement("OPTION");
+                    var newinput = $('<input hidden name="already_values[]" id="i' + moid + '" value="' + moid + '" />');
                     newoption.text = mot;
                     newoption.value = mov;
+                    newoption.id = moid;
                     target.add(newoption);
+//                    console.log(target.id[0]);
+                    if (target.id[0] === 'S') {
+                        $(target).append(newinput);
+                    }
                 }
             } else {
-//                alert(obj.options.length);
+                alert(obj.options.length);
                 for (i = 0; i < obj.length; i++) {
                     mot = obj.options.text;
                     mov = obj.options.value;
@@ -106,9 +119,7 @@
                     target.add(newoption);
                 }
                 obj.options.length = 0
-
             }
-
         }
     </script>
 @endsection

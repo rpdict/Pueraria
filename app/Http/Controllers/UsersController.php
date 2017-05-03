@@ -16,6 +16,7 @@ class UsersController extends Controller
     public function index()
     {
         $users = DB::table('users')->get();
+//        $users = User::all();
         return view('functions.users', compact('users'));
     }
 
@@ -48,7 +49,10 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        //
+        User::withTrashed()
+            ->where('id', $id)
+            ->restore();
+        return back()->withInput();
     }
 
     /**
@@ -82,6 +86,13 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+        if($user->trashed()){
+            echo '禁止用户成功！';
+        }else{
+            echo '禁止用户失败！';
+        }
+        return back()->withInput();
     }
 }

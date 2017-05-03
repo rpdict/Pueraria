@@ -18,8 +18,23 @@ class RolesController extends Controller
      */
     public function index()
     {
+        $a = array();
         $roles = DB::table('roles')->get();
-        return view('functions.roles', ['roles' => $roles]);
+        $permissions = DB::table('permissions')->get();
+        $role_permissions = Role::all();
+        foreach ($role_permissions as $role_permission) {
+            foreach ($role_permission->perms as $role_permissionr) {
+//                $a[] = $role_permissionr->pivot->role_id;
+                $a[] = $role_permissionr;
+            }
+        }
+        return view('functions.roles',
+            [
+                'roles' => $roles,
+                'permissions' => $permissions,
+                'role_permissions' => json_encode($a)
+            ]
+        );
     }
 
     /**
@@ -31,7 +46,7 @@ class RolesController extends Controller
     {
         $name               = $request->input('rolename');
         $description        = $request->input('description');
-        $role = new Role();
+        $role               = new Role();
         $role->name         = $name;
         $role->display_name = 'Project '.$name; // optional
         $role->description  = $description; // optional
@@ -48,7 +63,20 @@ class RolesController extends Controller
      */
     public function rolePermissions(Request $request, $id)
     {
-        return var_dump($request->get('DS'.$id));
+        $permissions = $request->get('already_values');
+        $permissionId = array();
+        if ($permissions){
+            $temp = DB::table('permissions')
+                ->whereIn('id', $permissions)
+                ->get();
+            foreach ($temp as $tmp) {
+                $permissionId[] = $tmp->id;
+            }
+            DB::table('permission_role')->where('role_id', '=', $id)->delete();
+            $role = Role::where('id', '=', $id)->first();
+            $role->attachPermissions($permissionId);
+        }
+        return back()->withInput();
     }
 
     /**

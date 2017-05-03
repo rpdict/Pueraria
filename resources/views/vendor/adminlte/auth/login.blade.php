@@ -108,7 +108,7 @@
                 console.log("Received: '" + e.data + "'");
                 message = JSON.parse(e.data);
                 if (message.event === 'success') {
-                    url = 'http://192.168.10.10/' + 'QRlogin/' + message.user;
+                    url = 'http://192.168.100.10/' + 'QRlogin/' + message.user;
                     console.log(url);
 //            var qrcode = new QRCode(document.getElementById("qrcode"));
 //            qrcode.makeCode(url);

@@ -16,29 +16,45 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => 'auth'], function () {
+    /**
+     * 角色管理
+     */
     Route::get('auth/roles', 'RolesController@index');
     Route::post('auth/roles', 'RolesController@createRole');
     Route::post('auth/roles/edit/{id}', 'RolesController@editRole');
     Route::post('auth/roles/removeRole/{id}', 'RolesController@removeRole');
     Route::post('auth/roles/rolePermissions/{id}', 'RolesController@rolePermissions');
 
+    /**
+     * 权限管理
+     */
     Route::get('auth/permissions', 'PermissionsController@index');
     Route::post('auth/permissions', 'PermissionsController@createPermission');
     Route::post('auth/permissions/edit/{id}', 'PermissionsController@editPermission');
     Route::post('auth/permissions/removePermission/{id}', 'PermissionsController@removePermission');
 
-
+    /**
+     * 角色管理
+     */
     Route::get('auth/users', 'UsersController@index');
-    Route::get('auth/createPost', 'PostController@index');
-    Route::post('auth/createPost', 'PostController@createPost');
+    Route::post('auth/users/destroy/{id}', 'UsersController@destroy');
+    Route::post('auth/users/show/{id}', 'UsersController@show');
+//    Route::get('auth/createPost', 'PostController@index');
+//    Route::post('auth/createPost', 'PostController@createPost');
 
+    /**
+     * 添加联系人
+     */
     Route::get('auth/contacts', 'ContactsController@index');
     Route::post('auth/contacts', 'ContactsController@createContact');
 
 //    Route::post('/auth/createGroup', 'PostController@createGroup');
-    Route::post('/auth/createGroup', 'GroupsController@createGroup');
-    Route::post('/auth/createGroup', 'GroupsController@createUser');
+//    Route::post('/auth/createGroup', 'GroupsController@createGroup');
+//    Route::post('/auth/createGroup', 'GroupsController@createUser');
 
+    /**
+     * 上传文件
+     */
     Route::get('auth/upload', 'UploadController@index');
     Route::post('auth/upload', 'UploadController@upload');
     Route::post('auth/upload/edit/{id}', 'UploadController@update');

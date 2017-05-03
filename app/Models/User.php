@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
@@ -9,7 +10,18 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
 class User extends Authenticatable
 {
     use Notifiable;
-    use EntrustUserTrait; // add this trait to your user model
+//    use EntrustUserTrait; // add this trait to your user model
+//    use SoftDeletes;
+    use EntrustUserTrait { restore as private restoreA; }
+    use SoftDeletes { restore as private restoreB; }
+    /**
+     * 解决 EntrustUserTrait 和 SoftDeletes 冲突
+     */
+    public function restore()
+    {
+        $this->restoreA();
+        $this->restoreB();
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -28,6 +40,13 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 
     /**
      * 获取这个作者下的所有文章。

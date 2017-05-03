@@ -11,34 +11,37 @@
                         </div>
                         <div class="box-body">
                             <div class="form-group">
-
-                                <div class="col-sm-10 col-md-6">
+                                <div class="col-sm-10 col-md-5">
                                     <label class="control-label">待添加权限</label>
-                                    <select name="D{{ $role->id }}" multiple="" style="height: 500px" class="form-control" ondblclick="moveselect(this,'DS{{ $role->id }}')">
-                                        <option>option 1</option>
-                                        <option>option 2</option>
-                                        <option>option 3</option>
-                                        <option>option 4</option>
-                                        <option>option 5</option>
+                                    <select id="D{{ $role->id }}" multiple="" style="height: 500px" class="form-control" ondblclick="moveselect('D{{ $role->id }}','SD{{ $role->id }}')">
+                                        @foreach( $permissions as $permission )
+                                            <option id='{{ $permission->id }}'>{{ $permission->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
-                                {{--<div class="col-sm-10 col-md-2" style="margin-top: 100px">--}}
-                                    {{--<input type="button" value="&lt;" name="B{{ $role->id }}" onclick="moveselect('DS{{ $role->id }}','D{{ $role->id }}')">--}}
-                                    {{--<input type="button" value="&gt;" name="BS{{ $role->id }}" onclick="moveselect('D{{ $role->id }}','DS{{ $role->id }}')">--}}
-                                {{--</div>--}}
-                                <div class="col-sm-10 col-md-6">
+                                <div class="col-sm-10 col-md-2" style="margin-top: 100px">
+                                    <input type="button" value="&lt;" name="B{{ $role->id }}" onclick="moveselect('SD{{ $role->id }}','D{{ $role->id }}')">
+                                    <input type="button" value="&gt;" name="SB{{ $role->id }}" onclick="moveselect('D{{ $role->id }}','SD{{ $role->id }}')">
+                                </div>
+                                <div class="col-sm-10 col-md-5">
                                     <label class="control-label">已添加权限</label>
-                                    <select name="DS{{ $role->id }}" multiple="" style="height: 500px" class="form-control" ondblclick="moveselect(this,'D{{ $role->id }}')">
-                                        <option>option 6</option>
-                                        <option>option 7</option>
-                                        <option>option 8</option>
-                                        <option>option 9</option>
-                                        <option>option 0</option>
+                                    <select id="SD{{ $role->id }}" multiple="" style="height: 500px" class="form-control" ondblclick="moveselect('SD{{ $role->id }}','D{{ $role->id }}')">
+                                        @if($role_permissions = json_decode($role_permissions))
+                                            @foreach( $role_permissions as $role_permission )
+                                                @if($role_permission->pivot->role_id === $role->id)
+                                                    <option value='{{ $role_permission->name }}' id='{{ $role_permission->id }}'>{{ $role_permission->name }}</option>
+                                                    {{--<input hidden name="already_values[]" id='i{{ $role_permission->id }}' value='{{ $role_permission->id }}'>--}}
+                                                @endif
+                                            @endforeach
+                                        @endif
                                     </select>
+                                    @foreach( $role_permissions as $role_permission )
+                                        @if($role_permission->pivot->role_id === $role->id)
+                                            {{--<option value='{{ $role_permission->name }}' id='{{ $role_permission->id }}'>{{ $role_permission->name }}</option>--}}
+                                            <input hidden name="already_values[]" id='i{{ $role_permission->id }}' value='{{ $role_permission->id }}'>
+                                        @endif
+                                    @endforeach
                                 </div>
-                            </div>
-                            <div class="form-group">
-
                             </div>
                         </div>
                         <!-- /.box-body -->
@@ -50,7 +53,6 @@
                     </form>
                 </div>
                 <!-- /.box -->
-
             </div>
         </div>
     </div>
