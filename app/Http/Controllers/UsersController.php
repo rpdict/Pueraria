@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
@@ -15,9 +17,40 @@ class UsersController extends Controller
      */
     public function index()
     {
+        $a = array();
         $users = DB::table('users')->get();
-//        $users = User::all();
-        return view('functions.users', compact('users'));
+        $roles = DB::table('roles')->get();
+//        $role_users = Role::all();
+        $role_users = User::all();
+        foreach ($role_users as $role_user) {
+            foreach ($role_user->roles as $role_usera) {
+//                $a[] = $role_permissionr->pivot->role_id;
+                $a[] = $role_usera;
+            }
+        }
+        return view('functions.users',
+            [
+                'users' => $users,
+                'roles' => $roles,
+                'role_users' => json_encode($a)
+            ]
+        );
+    }
+
+    public function userRoles(Request $request, $id)
+    {
+        $roles = $request->get('already_values');
+        $rolesId = array();
+        DB::table('role_user')->where('user_id', '=', $id)->delete();
+        if ($roles){
+            $temp = DB::table('roles')->whereIn('id', $roles)->get();
+            foreach ($temp as $tmp) {
+                $rolesId[] = $tmp->id;
+            }
+            $user = User::where('id', '=', $id)->first();
+            $user->attachRoles($rolesId);
+        }
+        return back()->withInput();
     }
 
     /**

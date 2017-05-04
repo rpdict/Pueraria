@@ -65,6 +65,7 @@ class RolesController extends Controller
     {
         $permissions = $request->get('already_values');
         $permissionId = array();
+        DB::table('permission_role')->where('role_id', '=', $id)->delete();
         if ($permissions){
             $temp = DB::table('permissions')
                 ->whereIn('id', $permissions)
@@ -72,7 +73,6 @@ class RolesController extends Controller
             foreach ($temp as $tmp) {
                 $permissionId[] = $tmp->id;
             }
-            DB::table('permission_role')->where('role_id', '=', $id)->delete();
             $role = Role::where('id', '=', $id)->first();
             $role->attachPermissions($permissionId);
         }

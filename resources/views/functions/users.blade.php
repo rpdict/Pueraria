@@ -38,7 +38,7 @@
                             <th>Actions</th>
                         </tr>
                         @foreach ($users as $user)
-                            @if ($user->id != Auth::id())
+
                             <tr>
                                 <td>{{ $user->id }}</td>
                                 <td>{{ $user->name }}</td>
@@ -51,26 +51,36 @@
                                                 {{--class="fa fa-edit"></span>Edit--}}
                                     {{--</button>--}}
                                     {{--@include('functions.partials.editUsers')--}}
-                                    @if( $user->deleted_at )
-                                        <form class="operate" method="post" style="display: inline"
-                                              action="{{ action('UsersController@show', ['id'=>$user->id]) }}">
-                                            {!! csrf_field() !!}
-                                            <button type="submit" class="btn btn-xs btn-success" name="on"><span
-                                                        class="fa fa-check"></span>ON
-                                            </button>
-                                        </form>
+                                    <button type="button" class="btn btn-xs btn-warning" name="edit" data-toggle="modal"
+                                            data-target=".bs-permission-modal-lg{{ $user->id }}"><span
+                                                class="fa fa-wrench"></span>Role
+                                    </button>
+                                    @include('functions.partials.roleUsers')
+                                    @if ($user->id != Auth::id())
+                                        @if( $user->deleted_at )
+                                            <form class="operate" method="post" style="display: inline"
+                                                  action="{{ action('UsersController@show', ['id'=>$user->id]) }}">
+                                                {!! csrf_field() !!}
+                                                <button type="submit" class="btn btn-xs btn-success" name="on"><span
+                                                            class="fa fa-check"></span>ON
+                                                </button>
+                                            </form>
+                                        @else
+                                            <form class="operate" method="post" style="display: inline"
+                                                  action="{{ action('UsersController@destroy', ['id'=>$user->id]) }}">
+                                                {!! csrf_field() !!}
+                                                <button type="submit" class="btn btn-xs btn-danger" name="off"><span
+                                                            class="fa fa-remove"></span>OFF
+                                                </button>
+                                            </form>
+                                        @endif
                                     @else
-                                        <form class="operate" method="post" style="display: inline"
-                                              action="{{ action('UsersController@destroy', ['id'=>$user->id]) }}">
-                                            {!! csrf_field() !!}
-                                            <button type="submit" class="btn btn-xs btn-danger" name="off"><span
-                                                        class="fa fa-remove"></span>OFF
-                                            </button>
-                                        </form>
+                                        <button type="submit" class="btn btn-xs btn-danger disabled" name="off"><span
+                                                    class="fa fa-remove"></span>OFF
+                                        </button>
                                     @endif
                                 </td>
                             </tr>
-                            @endif
                         @endforeach
                         </tbody>
                     </table>
