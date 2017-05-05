@@ -13,8 +13,9 @@ $ php artisan migrate --force
 $ php artisan key:generate
 $ npm install
 $ npm run dev
+$ php artisan db:seed --class=DatabaseSeeder
 ```
 
 ## Other
 
-可能要在roles表里添加”admin”项，在permissions表里添加”admin”项，再在各自的关联表里关联一下。。再把当前的用户加进去。。。好了，这下就能体验管理员用户的功能了
+默认管理员账号:admin@admin.com 密码:admin
