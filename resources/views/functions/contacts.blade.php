@@ -2,11 +2,11 @@
 
 @section('htmlheader_title')
     {{--{{ trans('adminlte_lang::message.home') }}--}}
-    Contacts
+    联系人
 @endsection
 
 @section('contentheader_title')
-    Contacts
+    联系人
     <button type="submit" class="btn btn-default btn-flat" name="add" data-toggle="modal"
             data-target=".bs-add-modal-lg"><i class="fa fa-plus"></i>
     </button>
@@ -31,11 +31,11 @@
                     </div>
                     <div class="box-footer no-padding">
                         <ul class="nav nav-stacked">
-                            <li><a href="#">Email <span
+                            <li><a href="#">邮箱 <span
                                             class="pull-right badge bg-blue">{{ $contact->email }}</span></a></li>
-                            <li><a href="#">TEL <span class="pull-right badge bg-aqua">{{ $contact->tel }}</span></a>
+                            <li><a href="#">电话 <span class="pull-right badge bg-aqua">{{ $contact->tel }}</span></a>
                             </li>
-                            <li><a href="#">Address <span
+                            <li><a href="#">地址 <span
                                             class="pull-right badge bg-green">{{ $contact->address }}</span></a>
                             </li>
                             {{--<li><a href="#">Followers <span class="pull-right badge bg-red">842</span></a></li>--}}

@@ -16,14 +16,15 @@ class WebsocketController extends Controller
      */
     public function index(Request $request)
     {
-        $key = md5(date('H:i:s'));
+        $key = md5(uniqid());
 //        $values = $request->session()->all();
         return view('websocket', ['key' => $key]);
 //        return view('websocket', compact('values'));
 
     }
 
-    public function redis(){
+    public function redis()
+    {
 //        event(new QRLoginedEvent('111', '666'));
         Redis::publish('test-channel', json_encode(['foo' => 'bar']));
     }
@@ -41,7 +42,7 @@ class WebsocketController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -52,7 +53,7 @@ class WebsocketController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -63,7 +64,7 @@ class WebsocketController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -74,8 +75,8 @@ class WebsocketController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -86,7 +87,7 @@ class WebsocketController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

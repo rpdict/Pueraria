@@ -31,6 +31,7 @@ class QRLoginController extends Controller
                 'event' => 'success',
                 'id' => $id
                 ]);
+//            Redis::lpush('QRLogin', $message);
             Redis::publish('login-channel', $message);
             return view('functions.partials.success');
         } else {

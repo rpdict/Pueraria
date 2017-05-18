@@ -17,8 +17,6 @@
 <br>
 {{--<div id="qrcode"></div>--}}
 <div id="qart"></div>
-<input type="text" name="input1"><br>
-<input type="text" name="input2">
 
 <script>
     var key = document.getElementById("key").innerHTML;

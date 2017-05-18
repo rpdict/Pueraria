@@ -2,11 +2,11 @@
 
 @section('htmlheader_title')
     {{--{{ trans('adminlte_lang::message.home') }}--}}
-    Permissions
+    权限
 @endsection
 
 @section('contentheader_title')
-    Permissions
+    权限
     <button type="submit" class="btn btn-default btn-flat" name="add" data-toggle="modal"
             data-target=".bs-add-modal-lg"><i class="fa fa-plus"></i>
     </button>
@@ -19,7 +19,7 @@
         <div class="col-xs-12">
             <div class="box box-primary">
                 <div class="box-header">
-                    <h3 class="box-title">Responsive Hover Table</h3>
+                    <h3 class="box-title">权限表</h3>
                     <div class="box-tools">
                         <div class="input-group input-group-sm" style="width: 150px;">
                             <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
@@ -36,11 +36,11 @@
                         <tbody>
                         <tr>
                             <th>ID</th>
-                            <th>Name</th>
-                            <th>Display Name</th>
-                            <th>Description</th>
-                            <th>Date</th>
-                            <th>Actions</th>
+                            <th>名字</th>
+                            <th>展示名</th>
+                            <th>描述</th>
+                            <th>创建日期</th>
+                            <th>操作</th>
                         </tr>
                         @foreach ($permissions as $permission)
                             <tr>
@@ -53,14 +53,14 @@
                                     <!-- Large modal -->
                                     <button type="button" class="btn btn-xs btn-primary" name="edit" data-toggle="modal"
                                             data-target=".bs-edit-modal-lg{{ $permission->id }}"><span
-                                                class="fa fa-edit"></span>Edit
+                                                class="fa fa-edit"></span>编辑
                                     </button>
                                     @include('functions.partials.editPermissions')
                                     <form class="operate" method="post" style="display: inline"
                                           action="{{ action('PermissionsController@removePermission', ['id'=>$permission->id]) }}">
                                         {!! csrf_field() !!}
                                         <button type="submit" class="btn btn-xs btn-danger" name="delete"><span
-                                                    class="fa fa-remove"></span>Delete
+                                                    class="fa fa-remove"></span>删除
                                         </button>
                                     </form>
                                 </td>

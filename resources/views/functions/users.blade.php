@@ -2,11 +2,11 @@
 
 @section('htmlheader_title')
     {{--{{ trans('adminlte_lang::message.home') }}--}}
-    Permissions
+    用户
 @endsection
 
 @section('contentheader_title')
-    Users
+    用户
 @endsection
 
 @section('main-content')
@@ -15,7 +15,7 @@
         <div class="col-xs-12">
             <div class="box box-primary">
                 <div class="box-header">
-                    <h3 class="box-title">Responsive Hover Table</h3>
+                    <h3 class="box-title">用户表</h3>
                     <div class="box-tools">
                         <div class="input-group input-group-sm" style="width: 150px;">
                             <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
@@ -32,10 +32,10 @@
                         <tbody>
                         <tr>
                             <th>ID</th>
-                            <th>User</th>
-                            <th>Email</th>
-                            <th>Date</th>
-                            <th>Actions</th>
+                            <th>用户名</th>
+                            <th>邮箱</th>
+                            <th>创建日期</th>
+                            <th>操作</th>
                         </tr>
                         @foreach ($users as $user)
 
@@ -53,7 +53,7 @@
                                     {{--@include('functions.partials.editUsers')--}}
                                     <button type="button" class="btn btn-xs btn-warning" name="edit" data-toggle="modal"
                                             data-target=".bs-permission-modal-lg{{ $user->id }}"><span
-                                                class="fa fa-wrench"></span>Role
+                                                class="fa fa-wrench"></span>角色
                                     </button>
                                     @include('functions.partials.roleUsers')
                                     @if ($user->id != Auth::id())
@@ -62,7 +62,7 @@
                                                   action="{{ action('UsersController@show', ['id'=>$user->id]) }}">
                                                 {!! csrf_field() !!}
                                                 <button type="submit" class="btn btn-xs btn-success" name="on"><span
-                                                            class="fa fa-check"></span>ON
+                                                            class="fa fa-check"></span>打开
                                                 </button>
                                             </form>
                                         @else
@@ -70,13 +70,13 @@
                                                   action="{{ action('UsersController@destroy', ['id'=>$user->id]) }}">
                                                 {!! csrf_field() !!}
                                                 <button type="submit" class="btn btn-xs btn-danger" name="off"><span
-                                                            class="fa fa-remove"></span>OFF
+                                                            class="fa fa-remove"></span>关闭
                                                 </button>
                                             </form>
                                         @endif
                                     @else
                                         <button type="submit" class="btn btn-xs btn-danger disabled" name="off"><span
-                                                    class="fa fa-remove"></span>OFF
+                                                    class="fa fa-remove"></span>关闭
                                         </button>
                                     @endif
                                 </td>
